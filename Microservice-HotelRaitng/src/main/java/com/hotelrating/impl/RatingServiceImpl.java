@@ -34,4 +34,20 @@ public class RatingServiceImpl implements RatingService {
     public List<Rating> getRatingByHotel(String hotelId) {
         return this.ratingRepo.findByHotelId(hotelId);
     }
+
+    @Override
+    public Rating updateRating(Rating rating) {
+//        todo: handle the exception
+        Rating updateRating = this.ratingRepo.findById(rating.getRatingId()).get();
+        updateRating.setRating(rating.getRating());
+        updateRating.setUserId(rating.getUserId());
+        updateRating.setFeeback(rating.getFeeback());
+        updateRating.setHotelId(rating.getHotelId());
+        return updateRating;
+    }
+
+    @Override
+    public void deleteRating(String ratingId) {
+        this.ratingRepo.deleteById(ratingId);
+    }
 }

@@ -42,4 +42,10 @@ public class RatingController {
         List<Rating> ratingByHotel = this.ratingService.getRatingByHotel(hotelId);
         return ResponseEntity.status(HttpStatus.OK).body(ratingByHotel);
     }
+
+    @DeleteMapping("/{ratingId}")
+    public ResponseEntity<?>  deleteRating( @PathVariable("ratingId") String ratingId){
+        this.ratingService.deleteRating(ratingId);
+        return new ResponseEntity<>("delete rating id :"+ ratingId,HttpStatus.OK);
+    }
 }

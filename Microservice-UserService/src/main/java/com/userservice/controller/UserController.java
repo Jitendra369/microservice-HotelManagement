@@ -1,5 +1,6 @@
 package com.userservice.controller;
 
+import com.userservice.entity.Hotel;
 import com.userservice.entity.User;
 import com.userservice.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,12 @@ public class UserController {
     public ResponseEntity<?> getUser(@PathVariable("userId") String userId) {
         User user = this.userService.getUser(userId);
         return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @GetMapping("/allHotel")
+    public ResponseEntity<?> getAllHotel(){
+        List<Hotel> allHotel = this.userService.getAllHotel();
+        return  new ResponseEntity<>(allHotel, HttpStatus.OK);
     }
 }
 

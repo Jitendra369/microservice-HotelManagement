@@ -1,14 +1,12 @@
 package com.userservice.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Rating {
 
     private String ratingId;
@@ -17,4 +15,6 @@ public class Rating {
 //    out of 5
     private int rating;
     private String feeback;
+
+    private Hotel hotel;
 }
