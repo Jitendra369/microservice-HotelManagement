@@ -1,0 +1,98 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: USER-SERVICE
+  datasource:
+    url: jdbc:mysql://localhost:3306/microservice
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL55Dialect
+        hbm2ddl:
+          auto: update
+    show-sql: true
+
+  config:
+    import: optional:configserver:http://localhost:8086
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-54593862.okta.com/oauth2/default
+      client:
+        registration:
+          my-internal-client:
+            provider: okta
+            authorization-grant-type: client_credentials
+            scope: internal
+            client-id: 0oa8jtj5lfLJg8wQE5d7
+            client-secret: lDpdQ7w0PAxuQShPbBXy1XWN0YmTKyssYci-qoVP
+        provider:
+          okta:
+            issuer-uri: https://dev-54593862.okta.com/oauth2/default
+
+#  profiles:
+#    active: prod
+
+# below config come from config-server
+#eureka:
+#  instance:
+#    prefer-ip-address: true
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka
+
+# enable the circuit-breaker in the health, which is part of accautator
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include:
+  endpoint:
+    health:
+      show-details: always
+
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      hotelRatingBreaker:
+        registerHealthIndicator: true
+        eventConsumerBufferSize: 10
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 6s
+        slidingWindowSize: 10
+        slidingWindowType: COUNT_BASED
+
+  retry:
+    instances:
+      hotelRatingBreaker:
+        max-attempts: 3
+        wait-duration: 5s
+
+  ratelimiter:
+    instances:
+      userRateLimiter:
+        limit-refresh-period: 4s
+        limit-for-period: 2
+        timeout-duration: 0s
+
+#okta configuration
+okta:
+  oauth2:
+    issuer: https://dev-54593862.okta.com/oauth2/default
+    audience: api://default
+
+

@@ -17,7 +17,7 @@ spring:
         - id: HOTEL-SERVICE
           uri: lb://HOTEL-SERVICE
           predicates:
-            - Path=/hotel
+            - Path=/hotel,/staff/**
 
 
 eureka:
@@ -29,6 +29,14 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
 
+#okta configuration for API Gateway
 
+okta:
+  oauth2:
+    issuer: https://dev-54593862.okta.com/oauth2/default
+    audience: api://default
+    client-id: 0oa8jtj5lfLJg8wQE5d7
+    client-secret: lDpdQ7w0PAxuQShPbBXy1XWN0YmTKyssYci-qoVP
+    scopes: openid, profile, email, offline_access
 
 

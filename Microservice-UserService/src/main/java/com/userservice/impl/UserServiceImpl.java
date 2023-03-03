@@ -61,6 +61,7 @@ public class UserServiceImpl implements UserService {
         return this.userRepo.findAll();
     }
 
+//    this method call hotelService and then call HotelRating , we have to use circuit breaker in this scenerio
     @Override
     public User getUser(String userId) {
         User user = this.userRepo.findById(userId).orElseThrow(() -> new ResourceNotFounds("user id not found " + userId));
