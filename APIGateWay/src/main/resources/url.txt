@@ -1,0 +1,3 @@
+API - Gateway URLS
+1) http://localhost:8085/HOTEL-SERVICE/hotel/all
+>> adding HOTEL-SERVICE , run the api from api gateway

@@ -18,7 +18,7 @@ public class HotelController {
     private HotelServiceImpl hotelService;
 
 //    save hotel handler
-    @PreAuthorize("hasAuthority('Admin')")
+//    @PreAuthorize("hasAuthority('Admin')")
     @PostMapping("/")
     public ResponseEntity<Hotel> saveHotel( @RequestBody Hotel hotel){
         this.hotelService.saveHotel(hotel);
@@ -26,7 +26,7 @@ public class HotelController {
     }
 
 //    get hotel handler
-    @PreAuthorize("hasAuthority('SCOPE_internal')")
+//    @PreAuthorize("hasAuthority('SCOPE_internal')")
     @GetMapping("/{hotelId}")
     public  ResponseEntity<Hotel> getHotel(@PathVariable( name = "hotelId", required = false) String hotelId){
 //        if hotelId is null , then
@@ -37,7 +37,7 @@ public class HotelController {
     }
 
 //    get all hotel handler
-    @PreAuthorize("hasAuthority('SCOPE_internal') || hasAuthority('Admin')")
+//    @PreAuthorize("hasAuthority('SCOPE_internal') || hasAuthority('Admin')")
     @GetMapping("/all")
     public ResponseEntity<List<Hotel>> getAllHotelInfor(){
         List<Hotel> allHotel = this.hotelService.getAllHotel();

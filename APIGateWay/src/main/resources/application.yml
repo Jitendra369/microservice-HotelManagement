@@ -5,6 +5,9 @@ spring:
     name: API-GATEWAY
   cloud:
     gateway:
+      discovery:
+        locator:
+          enabled: true
       routes:
         - id: USER-SERVICE
           uri: lb://USER-SERVICE
@@ -19,7 +22,6 @@ spring:
           predicates:
             - Path=/hotel,/staff/**
 
-
 eureka:
   instance:
     prefer-ip-address: true
@@ -31,12 +33,12 @@ eureka:
 
 #okta configuration for API Gateway
 
-okta:
-  oauth2:
-    issuer: https://dev-54593862.okta.com/oauth2/default
-    audience: api://default
-    client-id: 0oa8jtj5lfLJg8wQE5d7
-    client-secret: lDpdQ7w0PAxuQShPbBXy1XWN0YmTKyssYci-qoVP
-    scopes: openid, profile, email, offline_access
+#okta:
+#  oauth2:
+#    issuer: https://dev-54593862.okta.com/oauth2/default
+#    audience: api://default
+#    client-id: 0oa8jtj5lfLJg8wQE5d7
+#    client-secret: lDpdQ7w0PAxuQShPbBXy1XWN0YmTKyssYci-qoVP
+#    scopes: openid, profile, email, offline_access
 
 
