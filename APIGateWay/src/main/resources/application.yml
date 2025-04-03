@@ -25,6 +25,7 @@ spring:
 eureka:
   instance:
     prefer-ip-address: true
+    instance-id: ${spring.application.name}
   client:
     fetch-registry: true
     register-with-eureka: true
@@ -40,5 +41,5 @@ eureka:
 #    client-id: 0oa8jtj5lfLJg8wQE5d7
 #    client-secret: lDpdQ7w0PAxuQShPbBXy1XWN0YmTKyssYci-qoVP
 #    scopes: openid, profile, email, offline_access
-
+#  eureka.instance.instance-id=${spring.application.name}
 
